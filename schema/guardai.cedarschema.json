@@ -72,6 +72,8 @@
           "snapshot_consistent": { "type": "Boolean" },
           "delegation_depth": { "type": "Long" },
           "authority_requirement": { "type": "String" },
+          "source_attestation_verified": {"type": "Boolean"},
+          "integrity_hash_match": {"type": "Boolean"},
           "sandbox_unavailable": { "type": "Boolean" }
         }
       }
