@@ -30,7 +30,10 @@ def make_context(**overrides):
         "snapshot_consistent": True,
         "delegation_depth": 0,
         "authority_requirement": "implicit_sufficient",
-        "sandbox_unavailable": False
+                "authority_requirement": "implicit_sufficient",
+        "sandbox_unavailable": False,
+        "source_attestation_verified": False,
+        "integrity_hash_match": False
     }
     base.update(overrides)
     return base
@@ -65,3 +68,8 @@ run("partial_with_recipe", make_context(authority_requirement="explicit_required
 
 # Case 7: conflicting -> DENY(escalate)
 run("conflicting", make_context(authority_requirement="explicit_required", authority_status="conflicting"))
+# Case 8 (NEW for BUG C6): implicit_sufficient + conflicting authority -> ALLOW
+run("implicit_conflicting_allow", make_context(authority_requirement="implicit_sufficient", authority_status="conflicting"))
+
+# Case 9 (NEW for BUG C6): implicit_sufficient + partial authority -> ALLOW
+run("implicit_partial_allow", make_context(authority_requirement="implicit_sufficient", authority_status="partial"))

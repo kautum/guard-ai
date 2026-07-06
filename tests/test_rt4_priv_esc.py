@@ -36,11 +36,13 @@ def make_context(**overrides):
         "snapshot_consistent": True,
         "delegation_depth": 0,
         "authority_requirement": "implicit_sufficient",
-        "sandbox_unavailable": False
+                "authority_requirement": "implicit_sufficient",
+        "sandbox_unavailable": False,
+        "source_attestation_verified": False,
+        "integrity_hash_match": False
     }
     base.update(overrides)
     return base
-
 
 def run(name, context):
     request = {
@@ -70,4 +72,19 @@ run("legit_delegation", make_context(
     scope_is_strict_subset=True,
     authority_status="present",
     delegation_depth=1
+))
+
+# Case 4 (NEW — regression test for off-by-one bug found in audit):
+# delegation depth EXACTLY at the ceiling (3) must be DENIED, not allowed.
+run("cascade_depth_at_ceiling_boundary", make_context(
+    scope_is_strict_subset=True,
+    authority_status="present",
+    delegation_depth=3
+))
+
+# Case 5 (NEW): delegation depth one below ceiling (2) must be ALLOWED.
+run("cascade_depth_just_below_ceiling", make_context(
+    scope_is_strict_subset=True,
+    authority_status="present",
+    delegation_depth=2
 ))

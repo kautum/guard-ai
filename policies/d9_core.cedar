@@ -77,7 +77,9 @@ forbid(
   resource
 ) when {
   context.authority_status == "partial" &&
-  context.applicable_transform_recipe != ""
+  context.applicable_transform_recipe != "" &&
+  (context.authority_requirement == "explicit_required" ||
+   context.authority_requirement == "explicit_required_per_instance")
 };
 
 @id("escalate:partial_authority_no_recipe")
@@ -87,7 +89,9 @@ forbid(
   resource
 ) when {
   context.authority_status == "partial" &&
-  context.applicable_transform_recipe == ""
+  context.applicable_transform_recipe == "" &&
+  (context.authority_requirement == "explicit_required" ||
+   context.authority_requirement == "explicit_required_per_instance")
 };
 
 @id("escalate:conflicting_authority")
@@ -96,5 +100,7 @@ forbid(
   action,
   resource
 ) when {
-  context.authority_status == "conflicting"
+  context.authority_status == "conflicting" &&
+  (context.authority_requirement == "explicit_required" ||
+   context.authority_requirement == "explicit_required_per_instance")
 };

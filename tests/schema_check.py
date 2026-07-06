@@ -53,7 +53,10 @@ request = {
         "snapshot_consistent": True,
         "delegation_depth": 0,
         "authority_requirement": "implicit_sufficient",
-        "sandbox_unavailable": False
+                "authority_requirement": "implicit_sufficient",
+        "sandbox_unavailable": False,
+        "source_attestation_verified": False,
+        "integrity_hash_match": False
     }
 }
 
