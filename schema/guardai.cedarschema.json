@@ -1,0 +1,79 @@
+{
+  "": {
+    "entityTypes": {
+      "User": {
+        "shape": {
+          "type": "Record",
+          "attributes": {
+            "is_human": { "type": "Boolean" },
+            "trust_tier": { "type": "Long" }
+          }
+        }
+      },
+      "Agent": {
+        "memberOfTypes": [],
+        "shape": {
+          "type": "Record",
+          "attributes": {
+            "operating_on_behalf_of": { "type": "Entity", "name": "User" },
+            "own_managed_identity": { "type": "Boolean" },
+            "agency_budget": { "type": "Long" }
+          }
+        }
+      },
+      "SubAgent": {
+        "memberOfTypes": [],
+        "shape": {
+          "type": "Record",
+          "attributes": {
+            "delegation_depth": { "type": "Long" }
+          }
+        }
+      },
+      "Resource": {
+        "shape": {
+          "type": "Record",
+          "attributes": {
+            "resource_class": { "type": "String" },
+            "sensitivity": { "type": "String" },
+            "owner": { "type": "String" },
+            "origin_boundary": { "type": "String" }
+          }
+        }
+      }
+    },
+    "actions": {
+      "Read": { "appliesTo": { "principalTypes": ["User", "Agent", "SubAgent"], "resourceTypes": ["Resource"], "context": { "type": "GuardContext" } } },
+      "Send": { "appliesTo": { "principalTypes": ["User", "Agent", "SubAgent"], "resourceTypes": ["Resource"], "context": { "type": "GuardContext" } } },
+      "Publish": { "appliesTo": { "principalTypes": ["User", "Agent", "SubAgent"], "resourceTypes": ["Resource"], "context": { "type": "GuardContext" } } },
+      "Execute": { "appliesTo": { "principalTypes": ["User", "Agent", "SubAgent"], "resourceTypes": ["Resource"], "context": { "type": "GuardContext" } } },
+      "Install": { "appliesTo": { "principalTypes": ["User", "Agent", "SubAgent"], "resourceTypes": ["Resource"], "context": { "type": "GuardContext" } } },
+      "Delegate": { "appliesTo": { "principalTypes": ["User", "Agent", "SubAgent"], "resourceTypes": ["Resource"], "context": { "type": "GuardContext" } } },
+      "MemoryWrite": { "appliesTo": { "principalTypes": ["User", "Agent", "SubAgent"], "resourceTypes": ["Resource"], "context": { "type": "GuardContext" } } },
+      "PermissionGrant": { "appliesTo": { "principalTypes": ["User", "Agent", "SubAgent"], "resourceTypes": ["Resource"], "context": { "type": "GuardContext" } } }
+    },
+    "commonTypes": {
+      "GuardContext": {
+        "type": "Record",
+        "attributes": {
+          "action_provenance": { "type": "String" },
+          "untrusted_influence": { "type": "Boolean" },
+          "recipient_is_authorized": { "type": "Boolean" },
+          "high_impact": { "type": "Boolean" },
+          "authority_status": { "type": "String" },
+          "scope_is_strict_subset": { "type": "Boolean" },
+          "applicable_transform_recipe": { "type": "String" },
+          "intent_alignment": { "type": "String" },
+          "is_irreversible": { "type": "Boolean" },
+          "resource_sensitivity": { "type": "String" },
+          "sink_class": { "type": "String" },
+          "approval_present_for_this_action": { "type": "Boolean" },
+          "rate_exceeds_ceiling": { "type": "Boolean" },
+          "snapshot_consistent": { "type": "Boolean" },
+          "delegation_depth": { "type": "Long" },
+          "sandbox_unavailable": { "type": "Boolean" }
+        }
+      }
+    }
+  }
+}
