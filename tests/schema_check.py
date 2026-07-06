@@ -52,6 +52,7 @@ request = {
         "rate_exceeds_ceiling": False,
         "snapshot_consistent": True,
         "delegation_depth": 0,
+        "authority_requirement": "implicit_sufficient",
         "sandbox_unavailable": False
     }
 }

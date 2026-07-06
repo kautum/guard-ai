@@ -71,6 +71,7 @@
           "rate_exceeds_ceiling": { "type": "Boolean" },
           "snapshot_consistent": { "type": "Boolean" },
           "delegation_depth": { "type": "Long" },
+          "authority_requirement": { "type": "String" },
           "sandbox_unavailable": { "type": "Boolean" }
         }
       }
